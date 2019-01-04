@@ -11,9 +11,10 @@ Key assumptions:
 
 Many of the ideas implemented in this project comes from the following EMNLP 2018 papers:
 
-Coavoux et al., [Privacy-preserving Neural Representations of Text] (http://aclweb.org/anthology/D18-1001)
-Elazar et al., [Adversarial Removal of Demographic Attributes from Text Data] (http://aclweb.org/anthology/D18-1002)
+Coavoux et al., [Privacy-preserving Neural Representations of Text](http://aclweb.org/anthology/D18-1001)
 
-I have written an accompanying blog post about this project. You can read it on [Medium] (https://medium.com/@piesauce/what-i-learned-from-emnlp2018-papers-part-2-4ae0f550ced8)
+Elazar et al., [Adversarial Removal of Demographic Attributes from Text Data](http://aclweb.org/anthology/D18-1002)
+
+I have written an accompanying blog post about this project. You can read it on [Medium](https://medium.com/@piesauce/what-i-learned-from-emnlp2018-papers-part-2-4ae0f550ced8)
 
 
