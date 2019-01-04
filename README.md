@@ -31,8 +31,10 @@ To download the datasets, please run the python scripts in the **data** folder.
 
 **Code**
 
-The **data** folder contains python code to download all three datasets
-The **preprocessing** folder contains code to clean, normalize, and preprocess the datasets and generate training examples
+The **data** folder contains python code to download all three datasets.
+
+The **preprocessing** folder contains code to clean, normalize, and preprocess the datasets and generate training examples.
+
 The **models** folder contains various neural network models used to accomplish the main task and the adversarial task of predicting the private variables.
 
 
