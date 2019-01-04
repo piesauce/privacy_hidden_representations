@@ -19,6 +19,7 @@ Elazar et al., [Adversarial Removal of Demographic Attributes from Text Data](ht
 I have written an accompanying [blog post](https://medium.com/@piesauce/what-i-learned-from-emnlp2018-papers-part-2-4ae0f550ced8) explaining techniques for privacy-preservation.
 
 **Datasets**
+
 The experiments are performed on the same datasets as the ones used by [Coavoux et al](http://aclweb.org/anthology/D18-1001)
 They are:
 1. The Trustpilot reviews dataset, containing reviews associated with a sentiment score. The corpus is subdivided into 5 sections based on geographical origin. The main task is to predict the sentiment score associated with a review. The private (demographic) variables are the age and the gender of each reviewer.
