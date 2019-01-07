@@ -21,6 +21,7 @@ I have written an accompanying [blog post](https://medium.com/@piesauce/what-i-l
 For the latest advances in improving privacy and security in machine learning applications, have a look at the related workshops conducted at NeurIPS:
 
 [Privacy Preserving Machine Learning Workshop @ NeurIPS 2018](https://ppml-workshop.github.io/ppml/)
+
 [Workshop on Security in Machine Learning @ NeurIPS 2018](https://secml2018.github.io/)
 
 **Datasets**
