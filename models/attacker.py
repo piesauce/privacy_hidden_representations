@@ -11,14 +11,19 @@ from torch.autograd import Variable
 
 class MainClassifier(nn.Module):
     """
-    Implements a classifier used by the attacker to predict private variables from the hidden representations 
-    of the main classifier.
+    Implements a BiLSTM based text classifier that utilizes both word and character embeddings.
+    Characters in each word are passed through an LSTM to generate an encoding.
+    The character encoding is concatenated with the word embeddings for each word in the input
+    and is fed through a BiLSTM to generate an intermediate representation which is
+    then fed to a fully connected layer that performs the classification.
     """
-    def __init__(self, alphabet_size, vocab_size, args):
+    
+    def __init__(self, alphabet_size, vocab_size, output_size, args):
         """
         Args:
             alphabet_size (int): Number of unique characters in the input
             vocab_size (int): Size of the input vocabulary
+            output_size (int): Number of class labels
             args: Command-line arguments
         """
         super(MainClassifier, self).__init__()
@@ -31,7 +36,10 @@ class MainClassifier(nn.Module):
         self.word_hidden_dim = args.word_hidden_dim
         self.word_embedding = nn.Embedding(vocab_size, args.word_embed_dim)
         self.bilstm = nn.LSTM(args.word_embed_dim + self.char_hidden_dim * 2, self.word_hidden_dim, bidirectional=True)
-        
+        self.fc1 = nn.Linear(self.word_hidden_dim * 2,  args.fc_dim)
+        self.relu = nn.ReLU()
+        self.fc2 = nn.Linear(args.fc_dim, output_size)
+        self.softmax = nn.Softmax()
     
     def forward(self, sentence):
         """
@@ -39,8 +47,11 @@ class MainClassifier(nn.Module):
             sentence (list): Input sentence, consisting of a tuple (sentence_c, sentence_w)
             sentence_c contains the character indices of the input sentence.
             sentence_w contains the word indices of the input sentence.
+        Returns:
+            if adversary, returns intermediate encoding
+            if not adversary, returns softmax output
         """
-        sentence_c, sentence_w = sentence
+        sentence_c, sentence_w, adversary = sentence
         c_lstm_hidden = []
         
         
@@ -65,7 +76,15 @@ class MainClassifier(nn.Module):
         _ , (hidden_state, cell_state) = self.bilstm(wc_embed, (h_w, c_w))
         hidden_state = hidden_state.view(-1, self.word_hidden_dim * 2)
         
-        return hidden_state
+        if adversary:
+            return hidden_state
+        
+        fc_output = self.fc1(hidden_state)
+        fc_output = self.relu(fc_output)
+        fc_output = self.fc2(fc_output)
+        fc_output = self.softmax(fc_output)
+        return fc_output
+    
 
 class AdversaryClassifier(nn.Module):
     """
