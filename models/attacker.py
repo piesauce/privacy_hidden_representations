@@ -79,6 +79,7 @@ class AdversaryClassifier(nn.Module):
             output_size (int): Number of class labels
             args: Command-line arguments
         """
+        super(AdversaryClassifier, self).__init__()
         self.fc1 = nn.Linear(self.hidden_state_size,  args.fc_dim)
         self.relu = nn.ReLU()
         self.fc2 = nn.Linear(args.fc_dim, output_size)
